@@ -1,4 +1,4 @@
-# Creating a launch template
+# Creating a launch template and AMI
 
 Start off by launching your standard ec2:
 
@@ -24,6 +24,10 @@ Name and describe the template and keep the rest the same:
 
 "Create Launch Template":
 
+### AMI
+
+Its the same but select launch image instead
+
 Now terminate your instance:
 
 Now Launch instance from template to see if it works.
@@ -42,7 +46,7 @@ If needed make sure to update and upgrade and if prompted install nodejs.
 
 We want to be in our app terminal and we want to copy our app files to our ec2 instance. to do this we use the command:
 
-``` scp -i "~/.ssh/tech230.pem" -r C:/Users/shale/tech230_visualisation/teclti_machine/app ubuntu@ec2-54-78-182-137.eu-west-1.compute.amazonaws.com:/home/ubuntu```
+``` scp -i "~/.ssh/tech230.pem" -r C:/Users/shale/tech230_visualisation/tech230_multi_machine/app ubuntu@ec2-54-194-248-114.eu-west-1.compute.amazonaws.com:/home/ubuntu```
 
 This will take a while as it does one file at a time.
 
@@ -57,7 +61,7 @@ Manually install the dependencies:
 ```sudo npm install```
 ```sudo npm install -g pm2```
 
-```cd``` into app and start the app with ```pm2 start app.js```
+```cd``` into app and start the app with ```pm2 start app.js --update-env```
 
 It will run but you wont be able to see it when you access the webpage, we need to allow port 3000 to be viewed, so we need to add it as an inbound rule for our security group:
 
@@ -65,3 +69,5 @@ Lastly check the IP address and you should see the sparta app running.
 
 
 Congratulations!
+
+ps. Image == the current cumputer state that has been saved
