@@ -136,13 +136,14 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get install nginx -y
 sudo apt install git -y
+sudo sed -i "s/try_files \$uri \$uri\/ =404;/proxy_pass http:\/\/localhost:3000\/;/" /etc/nginx/sites-available/default
 sudo systemctl start nginx
 sudo systemctl enable nginx
 sudo apt-get install -y git
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install -y nodejs
-git clone https://github.com/shalekabh/app.git
-cd app
+git clone https://github.com/shalekabh/app.git /home/ubuntu/repo
+cd /home/ubuntu/rep/app
 sudo apt-get install -y npm
 sudo npm install
 sudo npm install -g pm2
@@ -150,3 +151,4 @@ pm2 stop app.js
 pm2 start app.js --update-env
 ```
 
+![Alt text](pics_for_mds/2023-05-23%20(1).png)
