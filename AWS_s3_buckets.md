@@ -140,4 +140,38 @@ response = bucket.delete()
 
 # Confirm its deleted
 print(response)
+```
 
+### S3 script.
+
+The following code will create a bucket, upload a file to that bucket, download a file from the bucket, delete the file from the bucket and finally delete the bucket:
+
+```
+import boto3
+
+# Connect to S3 using client
+s3 = boto3.client("s3")
+
+# Create a bucket
+bucket_name = "tech230-shaleka-boto"
+s3.create_bucket(Bucket=bucket_name, CreateBucketConfiguration={"LocationConstraint": "eu-west-1"})
+print(bucket_name, "has been created")
+
+# Upload a file to the bucket
+file_name = "sample.txt"
+with open(file_name, "rb") as data:
+    s3.upload_fileobj(data, bucket_name, file_name)
+
+# Download a file from the bucket
+new_file_name = "sample1.txt"
+s3.download_file(bucket_name, file_name, new_file_name)
+print(new_file_name, "has been downloaded")
+
+# Delete an object
+s3.delete_object(Bucket=bucket_name, Key=file_name)
+
+# Delete a bucket
+s3.delete_bucket(Bucket=bucket_name)
+print(bucket_name, "has been deleted and all its contents")
+```
+![Alt text](pics_for_mds/pythonS3.png)
