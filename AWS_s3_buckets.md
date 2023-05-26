@@ -175,3 +175,75 @@ s3.delete_bucket(Bucket=bucket_name)
 print(bucket_name, "has been deleted and all its contents")
 ```
 ![Alt text](pics_for_mds/pythonS3.png)
+
+### Installing aws cli on buntu ec2
+
+We initially need to install AWS CLI and the AWS SDK dependencies for boto3 to run:
+
+```
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+sudo apt install unzip
+
+unzip awscliv2.zip
+
+sudo ./aws/install
+```
+
+run : ```aws --version``` to see if it properly installed:
+
+![Alt text](pics_for_mds/aws--version.png)
+
+Next configure the AWS cli (Access, secret keys etc):
+
+```aws configure```
+
+To check you can use AWS CLI you can run a command to list the bucket:
+
+```aws s3 ls```
+
+![Alt text](pics_for_mds/aws%20s3%20ls.png)
+
+You can run the same commands from above to CRUD
+
+### Installing boto3 and the venv
+
+Install packages and activate the virtual environment:
+
+```
+sudo apt install python3.8-venv
+
+python3 -m venv <env-directory>
+
+source ~/<env-directory>/bin/activate
+```
+
+![Alt text](pics_for_mds/activate%20env.png)
+
+Install pip and use it to install boto3:
+
+```
+sudo apt-get install python3-pip
+
+pip install boto3    
+```
+
+And to enter python type in :
+
+```python3```
+
+Always check to see if commands work and you can list the buckets using a loop:
+
+```
+import boto3
+
+# Connect to S3 resources
+s3 = boto3.resource("s3")
+
+# List buckets
+for bucket in s3.buckets.all():
+    print(bucket.name)
+```
+![Alt text](pics_for_mds/loop%20through%20buckets.png)
+
+# GO UP TO SEE AUTOMATION
